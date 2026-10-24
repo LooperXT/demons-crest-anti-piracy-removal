@@ -15,7 +15,7 @@ MD5: e990ae600a8326eda25489bdddffca55
 
 ## The Four Anti-Piracy Checks
 
-Anti-Piracy checks take place at four times throughout Demon's Crest. When the Capcom logo is displayed shortly after powering on the system, when headbutting the Hippogriff statue in Stage 1, when approaching Arma in Stage 1, and whenever Firebrand takes damage. The game checks for abnormal ROM mapping and for the presence of SRAM. If a check is failed, a value of $FF is written to a corresponding address at $7E:0EEB-$0EEE.
+Anti-Piracy checks take place at four times throughout Demon's Crest: when the Capcom logo is displayed shortly after powering on the system, when headbutting the Hippogriff statue in Stage 1, when approaching Arma in Stage 1, and whenever Firebrand takes damage. The game checks for abnormal ROM mapping and for the presence of SRAM. If a check is failed, a value of $FF is written to a corresponding address in the range of $7E:0EEB-$0EEE.
 
 ## The Anti-Features
 
@@ -29,7 +29,7 @@ This patch changes precisely eight bytes in the game code to circumvent the anti
 
 Following the four anti-piracy checks, there are conditional BNE and BEQ instructions that lead down the good path if a check was passed. These have been turned into unconditional BRA instructions so that the check is always passed and the good path taken, resulting in the values at $7E:0EEB-$0EEE never being overwritten from their defaults of $00.
 
-In addition, BNE redirects in the "open menu" and "reduce enemy HP" subroutines have had their values changed, so that the BNE lands on the good path, and not the bad path. This means that even if non-zero values have found their way to the above addresses somehow (e.g., when loading an old save state), the player will still be able to open the menu and to damage enemies.
+In addition, the offsets for BNE redirects in the "open menu" and "reduce enemy HP" subroutines have been changed, so that the BNE lands on the good path, and not the bad path. This means that even if non-zero values have found their way to the above addresses somehow (e.g., when loading an old save state), the player will still be able to open the menu and to damage enemies.
 
 | EU Address | JP Address | NA Address | Original Byte | Patched Byte |
 | :--------- | :--------- | :--------- | :------------ | :----------- |
@@ -45,3 +45,7 @@ In addition, BNE redirects in the "open menu" and "reduce enemy HP" subroutines 
 ## Usage
 
 Using a patching tool like FLIPS or beat, apply either a .bps patch or a .ips patch to your headerless and legally obtained ROM dump. Different patches have been provided for different regions. They consist only of binary offset deltas and contain no copyrighted data.
+
+## Further Reading
+
+More details can be found in my [Demon's Crest guide on GameFAQs](https://gamefaqs.gamespot.com/snes/588275-demons-crest/faqs/82809).
